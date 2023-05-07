@@ -1,18 +1,14 @@
 # SimpleMassTransitExample
-This application was developed to show usage of MassTransit library brefily.
+This application was developed to briefly demonstrate the usage of the MassTransit library.
 
 # How to Use
-First, run the RabbitMQ with following command.
+First, start the RabbitMQ server with the following command.
 ```
 docker run -d --hostname rabbitmq-server -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ```
-Then, run the producer and consumer applications with following commands.
+Then, to run the producer and consumer applications, use the following commands:
 ```
 dotnet run --project SimpleMassTransitExample.Producer/ 
 dotnet run --project SimpleMassTransitExample.Consumer/ 
 ```
-Finallay, open ```http://ip_address:port/swagger/index.html``` from browser.
-Now, you can send events from producer to consumer.
-
-
-
+Finally, open ```http://ip_address:port/swagger/index.html``` in your browser. Now, you can send events from the producer to the consumer.
