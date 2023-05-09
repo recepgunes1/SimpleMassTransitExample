@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  s_rabbitmq:
+    container_name: c_rabbitmq
+    image: masstransit/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  s_consumer:
+    container_name: c_consumer
+    image: i_consumer
+    build:
+      context: .
+      dockerfile: SimpleMassTransitExample.Consumer/Dockerfile
+    depends_on:
+      - s_rabbitmq
+  s_producer:
+    container_name: c_producer
+    image: i_producer
+    build:
+      context: .
+      dockerfile: SimpleMassTransitExample.Producer/Dockerfile
+    depends_on:
+      - s_rabbitmq
+  

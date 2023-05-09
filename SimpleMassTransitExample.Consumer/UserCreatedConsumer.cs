@@ -8,8 +8,7 @@ public class UserCreatedConsumer : IConsumer<UserCreated>
 {
     public async Task Consume(ConsumeContext<UserCreated> context)
     {
-        await Task.Run(() => { Thread.Sleep(1); });
         var message = JsonSerializer.Serialize(context.Message);
-        Console.WriteLine(message);
+        await Console.Out.WriteLineAsync(message);
     }
 }
