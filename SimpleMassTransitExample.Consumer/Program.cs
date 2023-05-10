@@ -1,9 +1,14 @@
-﻿using SimpleMassTransitExample.Consumer;
+﻿using System.Runtime.InteropServices;
+using SimpleMassTransitExample.Consumer;
 using Topshelf;
-
+using Topshelf.Runtime.DotNetCore;
 
 HostFactory.Run(h =>
 {
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+    {
+        h.UseEnvironmentBuilder(target => new DotNetCoreEnvironmentBuilder(target));
+    }
     h.Service<MassTransitService>(s =>
     {
         s.ConstructUsing(_ => new MassTransitService());

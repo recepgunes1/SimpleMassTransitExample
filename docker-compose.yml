@@ -7,6 +7,7 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
   s_consumer:
     container_name: c_consumer
     image: i_consumer
@@ -15,6 +16,7 @@ services:
       dockerfile: SimpleMassTransitExample.Consumer/Dockerfile
     depends_on:
       - s_rabbitmq
+
   s_producer:
     container_name: c_producer
     image: i_producer
@@ -26,4 +28,3 @@ services:
       dockerfile: SimpleMassTransitExample.Producer/Dockerfile
     depends_on:
       - s_rabbitmq
-  
