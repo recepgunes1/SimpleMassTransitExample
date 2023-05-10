@@ -3,7 +3,7 @@ version: "3.3"
 services:
   s_rabbitmq:
     container_name: c_rabbitmq
-    image: masstransit/rabbitmq
+    image: rabbitmq:3.10-management
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -18,6 +18,9 @@ services:
   s_producer:
     container_name: c_producer
     image: i_producer
+    ports:
+      - "8080:80"
+      - "8081:443"
     build:
       context: .
       dockerfile: SimpleMassTransitExample.Producer/Dockerfile

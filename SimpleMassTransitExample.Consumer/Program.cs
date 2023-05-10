@@ -1,30 +1,17 @@
-﻿using MassTransit;
-using SimpleMassTransitExample.Consumer;
+﻿using SimpleMassTransitExample.Consumer;
+using Topshelf;
 
-var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
+
+HostFactory.Run(h =>
 {
-    cfg.Host("s_rabbitmq", 5672, "/",
-        s =>
-        {
-            s.Username("guest");
-            s.Password("guest");
-        });
-
-    // cfg.Host(new Uri("s_rabbitmq:5672"), h =>
-    // {
-    //     h.Username("guest");
-    //     h.Password("guest");
-    // });
-    cfg.ReceiveEndpoint("user-created-event", e => { e.Consumer<UserCreatedConsumer>(); });
+    h.Service<MassTransitService>(s =>
+    {
+        s.ConstructUsing(_ => new MassTransitService());
+        s.WhenStarted(tc => tc.Start(null));
+        s.WhenStopped(tc => tc.Stop(null));
+    });
+    h.RunAsLocalSystem();
+    h.SetDescription("MassTransit Service Example");
+    h.SetDisplayName("MassTransit Service");
+    h.SetServiceName("MassTransitService");
 });
-
-await bus.StartAsync();
-try
-{
-    Console.WriteLine("Press [Enter] to exit");
-    await Console.In.ReadLineAsync();
-}
-finally
-{
-    await bus.StopAsync();
-}

@@ -9,12 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MassTransit" Version="8.0.15"/>
-        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15"/>
+        <PackageReference Include="MassTransit" Version="8.0.15" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15" />
+        <PackageReference Include="Topshelf" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SimpleMassTransitExample.SharedLibrary\SimpleMassTransitExample.SharedLibrary.csproj"/>
+        <ProjectReference Include="..\SimpleMassTransitExample.SharedLibrary\SimpleMassTransitExample.SharedLibrary.csproj" />
     </ItemGroup>
 
     <ItemGroup>
